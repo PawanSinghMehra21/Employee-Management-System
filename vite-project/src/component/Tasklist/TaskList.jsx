@@ -1,44 +1,20 @@
 import React from 'react'
+import AcceptTask from './AcceptTask'
+import NewTask from './NewTask'
+import CompleteTask from './CompleteTask'
+import FailedTask from './FailedTask'
 
-const TaskList = () => {
+const TaskList = ({ data }) => {
   return (
-    <div id='tasklist' className='overflow-x-auto flex item-center justify-start  gap-5 flex-nowrap h-[55%] py-5 w-full mt-10  '>
-      <div className=' flex-shrink-0 h-full w-[300px] bg-red-400 rounded-xl'>
-          <div className='flex justify-between item-center'>
-            <h3 className='bg-red-600 px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'> 20 Feb 2024</h4>
-</div>
-<h2 className='mt-5 text-xl font-semibold'>Make a youtube video</h2>
-      </div>
-      <div className=' flex-shrink-0 h-full w-[300px] bg-yellow-400 rounded-xl'>
-          <div className='flex justify-between item-center'>
-            <h3 className='bg-yelllow-600 px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'> 20 Feb 2024</h4>
-</div>
-<h2 className='mt-5 text-xl font-semibold'>Make a youtube video</h2>
-      </div>
-      <div className=' flex-shrink-0 h-full w-[300px] bg-blue-400 rounded-xl'>
-          <div className='flex justify-between item-center'>
-            <h3 className='bg-red-600 px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'> 20 Feb 2024</h4>
-</div>
-<h2 className='mt-5 text-xl font-semibold'>Make a youtube video</h2>
-      </div>
-      <div className=' flex-shrink-0 h-full w-[300px] bg-green-400 rounded-xl'>
-          <div className='flex justify-between item-center'>
-            <h3 className='bg-yellow-600 px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'> 20 Feb 2024</h4>
-</div>
-<h2 className='mt-5 text-xl font-semibold'>Make a youtube video</h2>
-      </div>
-      <div className=' flex-shrink-0 h-full w-[300px] bg-red-400 rounded-xl'>
-          <div className='flex justify-between item-center'>
-            <h3 className='bg-red-600 px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'> 20 Feb 2024</h4>
-</div>
-<h2 className='mt-5 text-xl font-semibold'>Make a youtube video</h2>
-      </div>
-      
+    <div className='overflow-x-auto flex gap-5 h-[55%] mt-10'>
+
+      {data?.tasks?.map((elem, idx) => {
+        if (elem.active) return <AcceptTask key={idx} data={elem} />
+        if (elem.newTask) return <NewTask key={idx} data={elem} />
+        if (elem.completed) return <CompleteTask key={idx} data={elem} />
+        if (elem.failed) return <FailedTask key={idx} data={elem} />
+      })}
+
     </div>
   )
 }
